@@ -5,7 +5,6 @@ export const UserSchema = new mongoose.Schema(
     username: {
       type: String,
       required: [true, "Please provide an username"],
-      unique: true,
       minlength: 3,
       maxlength: 20,
       trim: true,
