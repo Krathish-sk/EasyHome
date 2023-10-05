@@ -1,4 +1,4 @@
-import bcrypt from "bcryptjs";
+import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { errorHandler } from "../utils/error.js";
 import User from "../models/userModel.js";
@@ -16,7 +16,7 @@ export const signup = async (req, res, next) => {
   }
 
   try {
-    const hashedPassword = bcrypt.hashSync(password, 10);
+    const hashedPassword = bcryptjs.hashSync(password, 10);
     const user = await User.create({
       username,
       email,
@@ -38,15 +38,17 @@ export const signup = async (req, res, next) => {
 
 export const signin = async (req, res, next) => {
   const { email, password } = req.body;
+  if (!email || !password) {
+    next(errorHandler(400, "Please provide all values"));
+  }
+  const validUser = await User.findOne({ email });
+  if (!validUser) {
+    next(errorHandler(404, "User do not exsits. Please register"));
+  }
+  const validPassword = bcryptjs.compareSync(password, validUser.password);
+  if (validPassword === false)
+    return next(errorHandler(401, "Oops !! invalid email or password"));
   try {
-    const validUser = await User.findOne({ email });
-    if (!validUser) {
-      next(errorHandler(404, "User do not exsits. Please register"));
-    }
-    const validPassword = bcrypt.compareSync(password, validUser.password);
-    if (!validPassword) {
-      next(errorHandler(401, "Oops !! invalid email or password"));
-    }
     const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
     const { password: pass, ...rest } = validUser._doc;
     res
