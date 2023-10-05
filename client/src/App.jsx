@@ -1,10 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { Header } from "./components";
 import { About, Home, Profile, SignIn, SignUp } from "./pages";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
   return (
     <BrowserRouter>
+      <ToastContainer />
       <Header />
       <Routes>
         <Route path="/" exact element={<Home />} />
