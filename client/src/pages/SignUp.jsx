@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
-  // const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -91,7 +90,6 @@ export default function SignUp() {
           <span className="text-blue-700">Sign In</span>
         </Link>
       </div>
-      {/* {error && <p className="text-red-500 mt-5 ">{error}</p>} */}
     </div>
   );
 }
