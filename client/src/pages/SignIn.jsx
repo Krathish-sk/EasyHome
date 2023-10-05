@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import { signInUser } from "../redux/user/userSlice";
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   function handleChange(e) {
     setFormData({
@@ -16,7 +20,7 @@ export default function SignIn() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      // dispatch
+      setLoading(true);
       const res = await fetch(`/api/auth/signin`, {
         method: "POST",
         headers: {
@@ -26,14 +30,15 @@ export default function SignIn() {
       });
       const data = await res.json();
       if (data.success === false) {
-        // dispatch
         toast.error(data.message);
+        setLoading(false);
         return;
       }
-      // dispatch signin
-      navigate("/")
+      dispatch(signInUser(data));
+      setLoading(false);
+      navigate("/");
     } catch (error) {
-      // dispatch
+      setLoading(false);
       toast.error(error.message);
     }
   }
@@ -58,7 +63,10 @@ export default function SignIn() {
           id="password"
           onChange={handleChange}
         />
-        <button className="bg-slate-700 text-white p-3 rounded-lg hover:opacity-95 disabled:opacity-80">
+        <button
+          disabled={loading}
+          className="bg-slate-700 text-white p-3 rounded-lg hover:opacity-95 disabled:opacity-80"
+        >
           Sign In
         </button>
       </form>

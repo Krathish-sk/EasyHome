@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { signInUser } from "../redux/user/userSlice";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   function handleChange(e) {
     setFormData({
@@ -33,8 +36,9 @@ export default function SignUp() {
           toast.error(data.message);
           return;
         }
+        dispatch(signInUser(data));
         setLoading(false);
-        navigate("/sign-in");
+        navigate("/");
       } catch (error) {
         setLoading(false);
         toast.error(error.message);
