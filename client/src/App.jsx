@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { Header } from "./components";
+import { Header, PrivateRoute } from "./components";
 import { About, Home, Profile, SignIn, SignUp } from "./pages";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -13,7 +13,9 @@ export default function App() {
         <Route path="/" exact element={<Home />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/profile" element={<Profile />} />
+        </Route>
         <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>
