@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { signInUser } from "../redux/user/userSlice";
+import { GoogleButton } from "../components";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
@@ -86,8 +87,8 @@ export default function SignUp() {
         >
           {loading ? "Loading..." : "Sign Up"}
         </button>
+        <GoogleButton />
       </form>
-      {/* Google Auth */}
       <div className="flex gap-2 mt-5">
         <p>Have an account ?</p>
         <Link to={"/sign-in"}>

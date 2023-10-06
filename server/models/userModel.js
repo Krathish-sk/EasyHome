@@ -19,6 +19,14 @@ export const UserSchema = new mongoose.Schema(
       required: true,
       minlength: 6,
     },
+    photo: {
+      type: String,
+      default: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+    },
+    number: {
+      type: Number,
+      default: "",
+    },
   },
   {
     timestamps: true,
