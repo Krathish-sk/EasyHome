@@ -12,8 +12,13 @@ import { updateUser, deleteUser } from "../redux/user/userSlice";
 import { app } from "../firebase";
 
 export default function Profile() {
-  const [formData, setFormData] = useState({});
   const { currentUser } = useSelector((state) => state.user);
+  const [formData, setFormData] = useState({
+    username: currentUser.username,
+    email: currentUser.email,
+    number: currentUser.number,
+    photo: currentUser.photo,
+  });
   const dispatch = useDispatch();
   const fileRef = useRef(null);
   const [file, setFile] = useState(undefined);
@@ -25,30 +30,6 @@ export default function Profile() {
       handleFileUpload(file);
     }
   }, [file]);
-
-  const handleFileUpload = (file) => {
-    const storage = getStorage(app);
-    const fileName = new Date().getTime() + file.name;
-    const storageRef = ref(storage, fileName);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setFilePerc(Math.round(progress));
-      },
-      (error) => {
-        setFileUploadError(true);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
-          setFormData({ ...formData, photo: downloadURL })
-        );
-      }
-    );
-  };
 
   function handleChange(e) {
     setFormData({
@@ -82,6 +63,30 @@ export default function Profile() {
       toast.error("Password do not match");
     }
   }
+
+  const handleFileUpload = (file) => {
+    const storage = getStorage(app);
+    const fileName = new Date().getTime() + file.name;
+    const storageRef = ref(storage, fileName);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setFilePerc(Math.round(progress));
+      },
+      (error) => {
+        setFileUploadError(true);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
+          setFormData({ ...formData, photo: downloadURL })
+        );
+      }
+    );
+  };
 
   async function handleDeleteUser() {
     try {
@@ -128,6 +133,7 @@ export default function Profile() {
         <img
           onClick={() => fileRef.current.click()}
           src={formData.photo || currentUser.photo}
+          defaultValue={formData.photo || currentUser.photo}
           alt="profile"
           className="rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2"
         />
@@ -147,7 +153,7 @@ export default function Profile() {
         <input
           type="text"
           placeholder="Username"
-          defaultValue={currentUser.username}
+          defaultValue={formData.username}
           id="username"
           className="border p-3 rounded-lg"
           onChange={handleChange}
@@ -155,8 +161,16 @@ export default function Profile() {
         <input
           type="email"
           placeholder="Email"
-          defaultValue={currentUser.email}
+          defaultValue={formData.email}
           id="email"
+          className="border p-3 rounded-lg"
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          placeholder="Phone"
+          defaultValue={currentUser.number}
+          id="number"
           className="border p-3 rounded-lg"
           onChange={handleChange}
         />

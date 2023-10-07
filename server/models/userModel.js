@@ -24,8 +24,8 @@ export const UserSchema = new mongoose.Schema(
       default: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
     },
     number: {
-      type: Number,
-      default: "",
+      type: String,
+      default: "--",
     },
   },
   {

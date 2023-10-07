@@ -20,12 +20,7 @@ export const updateUser = async (req, res, next) => {
   if (req.user.id !== req.params.id)
     return next(errorHandler(401, "Unauthorized"));
 
-  if (
-    !req.body.username ||
-    !req.body.email ||
-    !req.body.photo ||
-    !req.body.number
-  ) {
+  if (!req.body.username || !req.body.email || !req.body.photo) {
     return next(errorHandler(400, "Please provide required values"));
   }
   try {

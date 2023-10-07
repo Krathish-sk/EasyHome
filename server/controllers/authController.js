@@ -68,7 +68,6 @@ export const googleAuth = async (req, res, next) => {
       const token = jwt.sign({ id: exsitingUser._id }, process.env.JWT_SECRET);
 
       const { password: pass, ...rest } = exsitingUser._doc;
-      console.log(rest);
       res
         .cookie("access_token", token, { httpOnly: true })
         .status(200)
@@ -97,6 +96,15 @@ export const googleAuth = async (req, res, next) => {
           .json(rest);
       }
     }
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const signOut = async (req, res, next) => {
+  try {
+    res.clearCookie("access_token");
+    res.status(200).json("User have been logged out!");
   } catch (error) {
     next(error);
   }
