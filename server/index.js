@@ -8,7 +8,9 @@ import connectDB from "./config/db.js";
 connectDB();
 
 // Global routes imports
+import verifyToken from "./utils/verifyToken.js";
 import authRoutes from "./routes/authRoutes.js";
+import userRouter from "./routes/userRoutes.js";
 
 const port = 5000;
 const app = express();
@@ -17,6 +19,7 @@ app.use(cookieParser());
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/user", verifyToken, userRouter);
 
 // Error Middleware
 app.use((err, req, res, next) => {
