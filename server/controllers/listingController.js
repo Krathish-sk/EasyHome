@@ -22,6 +22,8 @@ export const getListing = async (req, res, next) => {
   }
 };
 
+export const getListings = async (req, res, next) => {};
+
 export const updateListing = async (req, res, next) => {
   const listing = await Listing.findById(req.params.id);
 
