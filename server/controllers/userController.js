@@ -64,13 +64,14 @@ export const deleteUser = async (req, res, next) => {
 };
 
 export const getUserListings = async (req, res, next) => {
-  if (req.user.id !== req.params.id) {
+  if (req.user.id === req.params.id) {
+    try {
+      const listing = await Listing.find({ userRef: req.params.id });
+      res.status(200).json(listing);
+    } catch (error) {
+      next(error);
+    }
+  } else {
     return next(errorHandler(401, "Un-Authorized"));
-  }
-  try {
-    const listing = await Listing.find({ userRef: req.params.id });
-    res.status(200).json(listing);
-  } catch (error) {
-    next(error);
   }
 };
