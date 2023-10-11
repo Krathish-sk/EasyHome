@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
 export default function Contact({ listing, handleClose }) {
-  const { userRef, name, email } = listing;
   const [homeOwner, setHomeOwner] = useState(null);
   const [message, setMessage] = useState("");
 
@@ -22,16 +21,22 @@ export default function Contact({ listing, handleClose }) {
       }
     };
     fetchOwner();
-  }, [userRef]);
+  }, [listing.userRef]);
 
   return (
     <>
       {homeOwner && (
         <div className="flex flex-col gap-2 mt-4">
           <div className="flex justify-between items-center">
-            <p className="text-center pl-4">
+            <p className="text-center">
               Contact{" "}
-              <span className="font-semibold">{name.toLowerCase()}</span>
+              <span className="font-semibold">
+                {homeOwner.username.toLowerCase()}
+              </span>{" "}
+              for{" "}
+              <span className="font-semibold">
+                {listing.name.toLowerCase()}
+              </span>
             </p>
             <AiOutlineCloseCircle
               style={{ cursor: "pointer" }}
@@ -48,7 +53,7 @@ export default function Contact({ listing, handleClose }) {
             className="w-full border p-3 rounded-lg"
           />
           <Link
-            to={`mailto:${email}?subject=Regarding ${name} &body=${message}`}
+            to={`mailto:${homeOwner.email}?subject=Regarding ${homeOwner.username} &body=${message}`}
             className="bg-slate-700 text-white text-center p-3 rounded-lg hover:opacity-90"
           >
             Send Message
