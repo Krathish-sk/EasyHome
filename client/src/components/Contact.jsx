@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 
-export default function Contact({ listing }) {
+export default function Contact({ listing, handleClose }) {
   const { userRef, name, email } = listing;
   const [homeOwner, setHomeOwner] = useState(null);
   const [message, setMessage] = useState("");
@@ -26,10 +27,17 @@ export default function Contact({ listing }) {
   return (
     <>
       {homeOwner && (
-        <div className="flex flex-col gap-2">
-          <p>
-            Contact <span className="font-semibold">{name.toLowerCase()}</span>
-          </p>
+        <div className="flex flex-col gap-2 mt-4">
+          <div className="flex justify-between items-center">
+            <p className="text-center pl-4">
+              Contact{" "}
+              <span className="font-semibold">{name.toLowerCase()}</span>
+            </p>
+            <AiOutlineCloseCircle
+              style={{ cursor: "pointer" }}
+              onClick={handleClose}
+            />
+          </div>
           <textarea
             name="message"
             id="message"
