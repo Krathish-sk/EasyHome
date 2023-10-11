@@ -303,7 +303,7 @@ export default function CreateListing() {
               </div>
             </div>
             {formData.offer && (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 mb-4">
                 <input
                   type="number"
                   id="discountPrice"
