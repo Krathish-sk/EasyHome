@@ -41,7 +41,7 @@ export default function Header() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             type="text"
-            placeholder="Serach..."
+            placeholder="Search..."
             className="bg-transparent focus:outline-none w-24 sm:w-64"
           />
           <button>
