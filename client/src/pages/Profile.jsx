@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { updateUser, deleteUser } from "../redux/user/userSlice";
 import { app } from "../firebase";
+import { Meta } from "../components";
 
 export default function Profile() {
   const { currentUser } = useSelector((state) => state.user);
@@ -156,6 +157,7 @@ export default function Profile() {
 
   return (
     <div className="p-3 max-w-lg mx-auto">
+      <Meta title={`EasyHomes - ${currentUser.username}`} />
       <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input

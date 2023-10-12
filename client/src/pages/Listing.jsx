@@ -13,7 +13,7 @@ import SwiperCore from "swiper";
 import { Navigation } from "swiper/modules";
 import "swiper/css/bundle";
 import { toast } from "react-toastify";
-import { Contact } from "../components";
+import { Contact ,Meta } from "../components";
 
 export default function Listing() {
   SwiperCore.use([Navigation]);
@@ -41,6 +41,7 @@ export default function Listing() {
 
   return (
     <main>
+        <Meta title={`EasyHomes - ${listing.name}`} />
       {listing ? (
         <div>
           <Swiper navigation>

@@ -8,6 +8,7 @@ import {
 import { app } from "../firebase";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { Meta } from "../components";
 
 export default function CreateListing() {
   const { currentUser } = useSelector((state) => state.user);
@@ -171,6 +172,7 @@ export default function CreateListing() {
   };
   return (
     <main className="p-3 max-w-4xl mx-auto">
+      <Meta title={`EasyHomes-Update-${formData.name}`} />
       <h1 className="text-3xl font-semibold text-center my-7">
         Update a Listing
       </h1>
