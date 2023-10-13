@@ -41,7 +41,7 @@ export default function Listing() {
 
   return (
     <main>
-        <Meta title={`EasyHomes - ${listing.name}`} />
+        <Meta title={`EasyHomes - ${params.listingId}`} />
       {listing ? (
         <div>
           <Swiper navigation>

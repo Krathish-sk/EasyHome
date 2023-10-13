@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 import cookieParser from "cookie-parser";
+import path from "path";
 import connectDB from "./config/db.js";
 
 // Connect to Database :-
@@ -32,6 +33,12 @@ app.use((err, req, res, next) => {
     statusCode,
     message,
   });
+});
+
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "/client/dist")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
 });
 
 app.listen(port, () => {

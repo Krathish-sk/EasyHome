@@ -49,16 +49,14 @@ export default function Header() {
             <FaSearch className="text-slate-600" />
           </button>
         </form>
-        <ul className="flex gap-4">
+        <ul className="flex gap-4 text-center">
           <Link to="/">
             <li className="text-slate-700 hidden sm:inline hover:underline hover:cursor-pointer">
               Home
             </li>
           </Link>
           <Link to="/about">
-            <li className="text-slate-700 hidden sm:inline hover:underline hover:cursor-pointer">
-              About
-            </li>
+            <li className=" sm:inline text-slate-700 hover:underline">About</li>
           </Link>
           <Link to="/profile">
             {currentUser ? (
