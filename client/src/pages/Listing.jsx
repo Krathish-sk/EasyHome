@@ -13,7 +13,7 @@ import SwiperCore from "swiper";
 import { Navigation } from "swiper/modules";
 import "swiper/css/bundle";
 import { toast } from "react-toastify";
-import { Contact ,Meta } from "../components";
+import { Contact, Meta } from "../components";
 
 export default function Listing() {
   SwiperCore.use([Navigation]);
@@ -39,9 +39,11 @@ export default function Listing() {
     fetchListing();
   }, [params.listingId]);
 
+  console.log(listing.userRef)
+
   return (
     <main>
-        <Meta title={`EasyHomes - ${params.listingId}`} />
+      <Meta title={`EasyHomes - ${params.listingId}`} />
       {listing ? (
         <div>
           <Swiper navigation>
@@ -122,7 +124,7 @@ export default function Listing() {
                 {listing.furnished ? "Furnished" : "Un-Furnished"}
               </li>
             </ul>
-            {currentUser && listing.userRef === currentUser._id && !contact && (
+            {currentUser && listing.userRef !== currentUser._id && !contact && (
               <button
                 onClick={() => setContact((prev) => !prev)}
                 className="bg-slate-700 text-white rounded-lg p-3 hover:opacity-90"
