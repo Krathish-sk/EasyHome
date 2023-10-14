@@ -257,6 +257,9 @@ export default function Profile() {
       <p className="text-red-700 mt-5">
         {showListingError ? "Error in displaying listings" : ""}
       </p>
+      {showListings && userListing && userListing.length === 0 && (
+        <div className="text-center mb-8">No Listings !!</div>
+      )}
       {showListings && userListing && userListing.length > 0 && (
         <div className="flex flex-col gap-4 mb-4">
           <h1 className="text-center mt-7 text-2xl font-semibold">

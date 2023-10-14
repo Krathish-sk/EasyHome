@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import SwiperCore from "swiper";
 import "swiper/css/bundle";
-import { ListingItem, Meta } from "../components";
+import { ListingItem, Loading, Meta } from "../components";
 
 export default function Home() {
   const [offerListing, setOfferListing] = useState([]);
@@ -93,6 +93,7 @@ export default function Home() {
       </Swiper>
       {/* listing results for offer, sale and rent */}
       <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10">
+        {!offerListing && <Loading />}
         {offerListing && offerListing.length > 0 && (
           <div className="">
             <div className="my-3">
@@ -113,6 +114,7 @@ export default function Home() {
             </div>
           </div>
         )}
+        {!rentListing && <Loading />}
         {rentListing && rentListing.length > 0 && (
           <div>
             <div className="my-3">
@@ -133,6 +135,7 @@ export default function Home() {
             </div>
           </div>
         )}
+        {!saleListing && <Loading />}
         {saleListing && saleListing.length > 0 && (
           <div>
             <div className="my-3">

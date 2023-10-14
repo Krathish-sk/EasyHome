@@ -13,7 +13,7 @@ import SwiperCore from "swiper";
 import { Navigation } from "swiper/modules";
 import "swiper/css/bundle";
 import { toast } from "react-toastify";
-import { Contact, Meta } from "../components";
+import { Contact, Loading, Meta } from "../components";
 
 export default function Listing() {
   SwiperCore.use([Navigation]);
@@ -38,8 +38,6 @@ export default function Listing() {
     };
     fetchListing();
   }, [params.listingId]);
-
-  console.log(listing.userRef)
 
   return (
     <main>
@@ -141,7 +139,7 @@ export default function Listing() {
           </div>
         </div>
       ) : (
-        <p className="text-center my-7 text-2xl">Loading...</p>
+        <Loading />
       )}
     </main>
   );
