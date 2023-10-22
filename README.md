@@ -1,6 +1,6 @@
 # _EasyHomes_
 
-_A one stop web application for buy / sale / renting your home. Browse residential properties with an ease._
+_A one stop web application for buy / sale / renting your home. Browse residential properties with an ease. Lookup for Residential properties for rent,buy,sell in India Without Brokerage.0% Brokerage,100% Genuine Owners_
 
 ### _About Application_
 
@@ -23,4 +23,4 @@ _Website built using MERN stack which allows user to authenticate with custom da
 - _Store logged-in user data with redux-persist_
 - _use Cookies storage for jwt token._
 
-~~_Application on air using render.com_ :- https://easy-homes.onrender.com/ ~~
+_Application on air using render.com_ :- https://easy-homes.onrender.com/
